@@ -1,0 +1,63 @@
+{
+  "name": "mvsqs",
+  "version": "1.0.0",
+  "description": "Moves messages between SQS queues",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive test",
+    "start": "node index.js",
+    "build": "npm run-script tsc",
+    "tsc": "tsc",
+    "coverage": "nyc npm test"
+  },
+  "dependencies": {
+    "aws-sdk": "2.266.1",
+    "dotenv": "6.0.0",
+    "ts-node": "7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "10.5.1",
+    "@types/mocha": "5.2.3",
+    "@types/sinon-chai": "3.2.0",
+    "chai": "4.1.2",
+    "mocha": "5.2.0",
+    "nyc": "12.0.2",
+    "proxyquire": "2.0.1",
+    "sinon": "6.0.1",
+    "sinon-chai": "3.2.0",
+    "sinon-express-mock": "2.0.4",
+    "tslint": "5.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshfoeh/mvsqs.git"
+  },
+  "nyc": {
+    "include": [
+      "index.js",
+      "app/*.js",
+      "app/**/*.js"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "reporter": [
+      "json",
+      "html",
+      "text"
+    ],
+    "exclude": [
+    ],
+    "all": true
+  },
+  "keywords": [
+    "sqs",
+    "aws"
+  ],
+  "author": "Josh Foeh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joshfoeh/mvsqs/issues"
+  },
+  "homepage": "https://github.com/joshfoeh/mvsqs#readme"
+}
