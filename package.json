@@ -1,6 +1,6 @@
 {
   "name": "mvsqs",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Moves messages between SQS queues",
   "main": "index.js",
   "scripts": {
@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "aws-sdk": "2.266.1",
-    "dotenv": "6.0.0",
-    "ts-node": "7.0.0"
+    "command-line-args": "5.0.2",
+    "typescript": "2.9.2"
   },
   "devDependencies": {
     "@types/node": "10.5.1",
@@ -22,11 +22,14 @@
     "chai": "4.1.2",
     "mocha": "5.2.0",
     "nyc": "12.0.2",
-    "proxyquire": "2.0.1",
     "sinon": "6.0.1",
     "sinon-chai": "3.2.0",
     "sinon-express-mock": "2.0.4",
+    "ts-node": "7.0.0",
     "tslint": "5.10.0"
+  },
+  "bin": {
+    "mvsqs": "./bin/global.js"
   },
   "repository": {
     "type": "git",
@@ -46,16 +49,17 @@
       "html",
       "text"
     ],
-    "exclude": [
-    ],
+    "exclude": [],
     "all": true
   },
   "keywords": [
     "sqs",
-    "aws"
+    "aws",
+    "mv"
   ],
   "author": "Josh Foeh",
   "license": "MIT",
+  "preferGlobal": true,
   "bugs": {
     "url": "https://github.com/joshfoeh/mvsqs/issues"
   },
