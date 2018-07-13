@@ -1,23 +1,13 @@
 import { parseArgs } from "./cli";
 import { awsArgs } from "../types/awsArgs";
+import { validateArgs } from "./validateArgs";
+import { moveMessages } from "./moveMessages";
 
-export function start({cli = parseArgs} = {}) {
-    let options: awsArgs = cli();
+export function start({cli = parseArgs, validate = validateArgs, move = moveMessages} = {}) {
+    let args: awsArgs = cli();
 
-    // Validate args
-    let missingParam: string;
-    if (!options.source) {
-        missingParam = "source";
-    }
-    else if (!options.dest) {
-        missingParam = "dest";
-    }
-    if (missingParam) {
-        console.log(`Missing required argument: ${missingParam}`);
-        process.exit(1);
-    }
+    validate(args);
 
-    console.log(`Options are:
-    ${JSON.stringify(options, null, 2)}`);
+    move({args: args});
 
 }
