@@ -20,7 +20,6 @@ export function getSQS(args: awsArgs) {
         config.secretAccessKey = secret;
     }
 
-    return () => {
-        return new AWS.SQS(config);
-    };
+    return new AWS.SQS(config);
+
 }

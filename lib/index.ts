@@ -8,6 +8,13 @@ export function start({cli = parseArgs, validate = validateArgs, move = moveMess
 
     validate(args);
 
-    move({args: args});
+    console.log(`Starting move from ${args.source} to ${args.dest}`);
+
+    move(args).then((numCompleted: number) => {
+        console.log(`Finished moving ${numCompleted} messages`);
+    }).catch((numCompleted: number) => {
+        console.log(`Failed after moving ${numCompleted} messages.
+        There should be additional logging above`);
+    });
 
 }

@@ -1,14 +1,22 @@
-export function sendMessage(getSQS, url: string) {
-    let sqs = getSQS();
-    let params = {
-        QueueUrl: url,
-        AttributeNames: [
-            "QueueArn"
-        ]
-    };
-    sqs.getQueueAttributes(params, function(err, data) {
-        console.log("In send message callback");
-        if (err) console.log(err, err.stack); // an error occurred
-        else     console.log(data);           // successful response
-    });
+import { SendingMessage } from "../types/sendingMessage";
+
+export function sendMessage(sqs, url: string): (message: SendingMessage) => Promise<boolean> {
+    return (message: SendingMessage) => {
+        let params = {
+            QueueUrl: url,
+            ...message
+        };
+        return new Promise<boolean>((resolve, reject) => {
+            // sqs.sendMessage(params, function(err, data) {
+            //     if (err) {
+            //         console.log("Error sending messages");
+            //         console.log(err, err.stack);
+            //         return reject();
+            //     }
+            //     return resolve(true);
+            // });
+            return resolve(true);
+        });
+    }
+
 }
