@@ -1,18 +1,33 @@
-import { ReceivedMessage } from "../types/receivedMessage";
-import { SendingMessage } from "../types/sendingMessage";
+import AWS = require("aws-sdk");
 
-export function transformMessages(receivedMessage: ReceivedMessage): TransformObject {
-    const send = <SendingMessage>{
-
+export function transformMessage(receivedMessage: AWS.SQS.Message): TransformObject {
+    const transformedAttributes: AWS.SQS.MessageBodyAttributeMap = transformAttributes(receivedMessage.MessageAttributes);
+    const send = <AWS.SQS.SendMessageRequest>{
+        MessageBody: receivedMessage.Body,
+        MessageAttributes: transformedAttributes
     };
-    console.log(`in transform, message is: ${JSON.stringify(receivedMessage, null, 2)}`);
     return <TransformObject>{
         sendingMessage: send,
         deleteHandle: receivedMessage.ReceiptHandle
     };
 }
 
+function transformAttributes(attributes: AWS.SQS.MessageBodyAttributeMap): AWS.SQS.MessageBodyAttributeMap {
+    let transformed: AWS.SQS.MessageBodyAttributeMap = {};
+
+    for (const key in attributes) {
+        const value: AWS.SQS.MessageAttributeValue = attributes[key];
+        // Remove the not yet implemented list values
+        transformed[key]= <AWS.SQS.MessageAttributeValue> {
+            DataType: value.DataType,
+            StringValue: value.StringValue,
+            BinaryValue: value.BinaryValue
+        };
+    }
+    return transformed;
+}
+
 export interface TransformObject{
-    sendingMessage: SendingMessage,
+    sendingMessage: AWS.SQS.SendMessageRequest,
     deleteHandle: string
 }

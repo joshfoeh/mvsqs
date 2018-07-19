@@ -13,8 +13,8 @@ export function start({cli = parseArgs, validate = validateArgs, move = moveMess
     move(args).then((numCompleted: number) => {
         console.log(`Finished moving ${numCompleted} messages`);
     }).catch((numCompleted: number) => {
-        console.log(`Failed after moving ${numCompleted} messages.
-        There should be additional logging above`);
+        console.log(`Failed after moving ${numCompleted} messages.`);
+        console.log("There should be additional logging above");
     });
 
 }

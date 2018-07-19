@@ -1,8 +1,8 @@
 import { awsArgs } from "../types/awsArgs";
 import { SQSConfig } from "../types/sqsConfig";
-let AWS = require("aws-sdk");
+import AWS = require("aws-sdk");
 
-export function getSQS(args: awsArgs) {
+export function getSQS(args: awsArgs): AWS.SQS {
     let region = args.region ? args.region: "us-east-1";
     let access = args.aws_access ? args.aws_access: null;
     let secret = args.aws_secret ? args.aws_secret: null;
