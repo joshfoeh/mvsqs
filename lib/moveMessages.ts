@@ -1,21 +1,21 @@
 import { getSQS } from "./SQS";
 import { sendMessage } from "./sendMessages";
 import { receiveMessages } from "./receiveMessages";
-import { awsArgs } from "../types/awsArgs";
+import { AWSArgs } from "../types/awsArgs";
 import { transformMessage, TransformObject } from "./transformMessage";
 import { deleteMessage } from "./deleteMessage";
 import AWS = require("aws-sdk");
 
-export function moveMessages(args: awsArgs, {getSqs = getSQS, receive = receiveMessages,
+export function moveMessages(args: AWSArgs, {getSqs = getSQS, receive = receiveMessages,
     send = sendMessage, transform = transformMessage, deleteFunc = deleteMessage} = {}): Promise<number> {
 
-    let sqs: AWS.SQS = getSqs(args);
+    const sqs: AWS.SQS = getSqs(args);
 
-    let receiveRun = receive(sqs, args.source);
-    let sendRun = send(sqs, args.dest);
-    let deleteRun = deleteFunc(sqs, args.source);
+    const receiveRun = receive(sqs, args.source);
+    const sendRun = send(sqs, args.dest);
+    const deleteRun = deleteFunc(sqs, args.source);
 
-    let numMessages: number = 0;
+    let numMessages = 0;
 
     return new Promise((resolve, reject) => {
         const moveFunc = (receivedMessage: AWS.SQS.Message) => {
@@ -45,6 +45,5 @@ export function moveMessages(args: awsArgs, {getSqs = getSQS, receive = receiveM
             reject(numMessages);
         });
     });
-
 
 }

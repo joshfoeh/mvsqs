@@ -23,6 +23,10 @@
       true,
       "spaces"
     ],
+    "interface-name": [
+      true,
+      "never-prefix"
+    ],
     "interface-over-type-literal": true,
     "label-position": true,
     "max-line-length": [

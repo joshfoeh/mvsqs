@@ -8,12 +8,13 @@
     "start": "node index.js",
     "build": "npm run-script tsc",
     "tsc": "tsc",
-    "coverage": "nyc npm test"
+    "coverage": "nyc npm test",
+    "lint": "tslint -p .",
+    "lint:fix": "tslint -p . --fix"
   },
   "dependencies": {
     "aws-sdk": "2.266.1",
-    "command-line-args": "5.0.2",
-    "typescript": "2.9.2"
+    "command-line-args": "5.0.2"
   },
   "devDependencies": {
     "@types/node": "10.5.1",
@@ -26,7 +27,8 @@
     "sinon-chai": "3.2.0",
     "sinon-express-mock": "2.0.4",
     "ts-node": "7.0.0",
-    "tslint": "5.10.0"
+    "tslint": "5.10.0",
+    "typescript": "2.9.2"
   },
   "bin": {
     "mvsqs": "./bin/global.js"

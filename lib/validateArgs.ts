@@ -1,11 +1,10 @@
-import { awsArgs } from "../types/awsArgs";
+import { AWSArgs } from "../types/awsArgs";
 
-export function validateArgs(args: awsArgs) {
+export function validateArgs(args: AWSArgs) {
     let missingParam: string;
     if (!args.source) {
         missingParam = "source";
-    }
-    else if (!args.dest) {
+    } else if (!args.dest) {
         missingParam = "dest";
     }
     if (missingParam) {
