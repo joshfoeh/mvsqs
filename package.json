@@ -21,11 +21,12 @@
     "@types/mocha": "5.2.3",
     "@types/sinon-chai": "3.2.0",
     "chai": "4.1.2",
+    "chai-as-promised": "7.1.1",
     "mocha": "5.2.0",
     "nyc": "12.0.2",
+    "proxyquire": "2.0.1",
     "sinon": "6.0.1",
     "sinon-chai": "3.2.0",
-    "sinon-express-mock": "2.0.4",
     "ts-node": "7.0.0",
     "tslint": "5.10.0",
     "typescript": "2.9.2"
@@ -39,9 +40,7 @@
   },
   "nyc": {
     "include": [
-      "index.js",
-      "app/*.js",
-      "app/**/*.js"
+      "lib/*.js"
     ],
     "extension": [
       ".ts"
@@ -51,13 +50,17 @@
       "html",
       "text"
     ],
-    "exclude": [],
+    "exclude": [
+      "lib/SQS.js",
+      "lib/index.js"
+    ],
     "all": true
   },
   "keywords": [
     "sqs",
     "aws",
-    "mv"
+    "mv",
+    "move"
   ],
   "author": "Josh Foeh",
   "license": "MIT",

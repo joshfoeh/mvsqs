@@ -1,6 +1,6 @@
 import { AWSArgs } from "../types/awsArgs";
 
-export function validateArgs(args: AWSArgs) {
+export function validateArgs(args: AWSArgs): boolean {
     let missingParam: string;
     if (!args.source) {
         missingParam = "source";
@@ -9,6 +9,7 @@ export function validateArgs(args: AWSArgs) {
     }
     if (missingParam) {
         console.log(`Missing required argument: ${missingParam}`);
-        process.exit(1);
+        return false;
     }
+    return true;
 }

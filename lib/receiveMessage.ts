@@ -1,9 +1,6 @@
-import { ReceivedMessage } from "../types/receivedMessage";
 import AWS = require("aws-sdk");
 
-export function receiveMessages(sqs: AWS.SQS, url: string): () => Promise<AWS.SQS.Message> {
-    const waitSecs = 10;
-    const millis = waitSecs * 1000;
+export function receiveMessage(sqs: AWS.SQS, url: string): () => Promise<AWS.SQS.Message> {
     const params: AWS.SQS.Types.ReceiveMessageRequest = {
         QueueUrl: url,
         AttributeNames: [
@@ -14,14 +11,10 @@ export function receiveMessages(sqs: AWS.SQS, url: string): () => Promise<AWS.SQ
             "All"
         ],
         VisibilityTimeout: 10,
-        WaitTimeSeconds: waitSecs
+        WaitTimeSeconds: 10
     };
     return () => {
         return new Promise<AWS.SQS.Message>((resolve, reject) => {
-            const timer = setTimeout(() => {
-                console.log(`Waited for ${waitSecs} seconds and found no messages, ending process`);
-                return resolve(null);
-            }, millis);
             sqs.receiveMessage(params, (err, data: AWS.SQS.ReceiveMessageResult) => {
                 if (err) {
                     console.log("Error receiving messages");
@@ -29,11 +22,8 @@ export function receiveMessages(sqs: AWS.SQS, url: string): () => Promise<AWS.SQ
                     return reject();
                 }
                 if (!data.Messages || data.Messages.length === 0) {
-                    // todo why is this the last thing logged?
                     return resolve(null);
                 }
-                // Still receiving messages, no need to have the timeout run anymore
-                clearTimeout(timer);
                 // It will always be message 0 because we only receive one message at a time
                 const message: AWS.SQS.Message = data.Messages[0];
                 return resolve(message);

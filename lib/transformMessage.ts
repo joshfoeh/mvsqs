@@ -2,14 +2,14 @@ import AWS = require("aws-sdk");
 
 export function transformMessage(receivedMessage: AWS.SQS.Message): TransformObject {
     const transformedAttributes: AWS.SQS.MessageBodyAttributeMap = transformAttributes(receivedMessage.MessageAttributes);
-    const send = {
+    const send = <AWS.SQS.SendMessageRequest>{
         MessageBody: receivedMessage.Body,
         MessageAttributes: transformedAttributes
-    } as AWS.SQS.SendMessageRequest;
-    return {
+    };
+    return <TransformObject>{
         sendingMessage: send,
         deleteHandle: receivedMessage.ReceiptHandle
-    } as TransformObject;
+    };
 }
 
 function transformAttributes(attributes: AWS.SQS.MessageBodyAttributeMap): AWS.SQS.MessageBodyAttributeMap {

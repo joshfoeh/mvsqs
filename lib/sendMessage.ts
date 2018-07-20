@@ -1,4 +1,3 @@
-import { SendingMessage } from "../types/sendingMessage";
 import AWS = require("aws-sdk");
 
 export function sendMessage(sqs: AWS.SQS, url: string): (message: AWS.SQS.SendMessageRequest) => Promise<boolean> {

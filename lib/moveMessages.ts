@@ -1,12 +1,12 @@
 import { getSQS } from "./SQS";
-import { sendMessage } from "./sendMessages";
-import { receiveMessages } from "./receiveMessages";
+import { sendMessage } from "./sendMessage";
+import { receiveMessage } from "./receiveMessage";
 import { AWSArgs } from "../types/awsArgs";
 import { transformMessage, TransformObject } from "./transformMessage";
 import { deleteMessage } from "./deleteMessage";
 import AWS = require("aws-sdk");
 
-export function moveMessages(args: AWSArgs, {getSqs = getSQS, receive = receiveMessages,
+export function moveMessages(args: AWSArgs, {getSqs = getSQS, receive = receiveMessage,
     send = sendMessage, transform = transformMessage, deleteFunc = deleteMessage} = {}): Promise<number> {
 
     const sqs: AWS.SQS = getSqs(args);

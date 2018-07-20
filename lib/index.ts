@@ -6,7 +6,9 @@ import { moveMessages } from "./moveMessages";
 export function start({cli = parseArgs, validate = validateArgs, move = moveMessages} = {}) {
     const args: AWSArgs = cli();
 
-    validate(args);
+    if (!validate(args)) {
+        process.exit(1);
+    }
 
     console.log(`Starting move from ${args.source} to ${args.dest}`);
 
