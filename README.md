@@ -2,10 +2,12 @@
 Mvsqs is a global package that transfers all messages from one SQS queue to another. 
 This could be useful in situations where you need to transfer messages from a DLQ or you are retiring a queue.
 
+Mvsqs will keep running until all of the messages are gone from the source queue and then it will end it's process.
+
 ##Install
-```
-npm i -g sqsmv
-```
+
+    npm i -g sqsmv
+    
 ##Usage
 Required arguments are:
  

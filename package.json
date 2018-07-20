@@ -51,8 +51,7 @@
       "text"
     ],
     "exclude": [
-      "lib/SQS.js",
-      "lib/index.js"
+      "lib/SQS.js"
     ],
     "all": true
   },
