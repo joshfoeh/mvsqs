@@ -8,8 +8,6 @@ describe("Validate Arguments", () => {
     chai.use(sinonChai);
     chai.should();
 
-
-
     sinon.spy(console, "log");
 
     it("Returns false if missing source", () => {

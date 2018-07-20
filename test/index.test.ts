@@ -31,7 +31,7 @@ describe("Index", () => {
 
     it("Validate called with correct arguments", () => {
         // Execution
-        start({cli: cli, validate: validate, move: move});
+        start({cli, validate, move});
 
         // Validation
         expect(validate).calledWith(args);
@@ -39,7 +39,7 @@ describe("Index", () => {
 
     it("Move called with correct arguments", () => {
         // Execution
-        start({cli: cli, validate: validate, move: move});
+        start({cli, validate, move});
 
         // Validation
         expect(move).calledWith(args);
@@ -52,7 +52,7 @@ describe("Index", () => {
         sinon.stub(process, "exit");
 
         // Execution
-        start({cli: cli, validate: validate, move: move});
+        start({cli, validate, move});
 
         // Validation
         expect(process.exit).to.be.calledOnce;
@@ -60,7 +60,7 @@ describe("Index", () => {
 
     it("Logs the correct string when move succeeds", () => {
         // Execution
-        start({cli: cli, validate: validate, move: move});
+        start({cli, validate, move});
 
         // Validation
         expect(console.log).calledWith(`Finished moving ${numCompleted} messages`);
@@ -71,7 +71,7 @@ describe("Index", () => {
         move.returns(Promise.reject(numCompleted));
 
         // Execution
-        start({cli: cli, validate: validate, move: move});
+        start({cli, validate, move});
 
         // Validation
         // expect(console.log).to.have.been.called;
