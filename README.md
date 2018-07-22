@@ -7,7 +7,7 @@ Mvsqs will run until it doesn't receive a message from the source queue for 10 s
 
 ##Install
 
-    npm i -g sqsmv
+    npm i -g mvsqs
     
 ##Usage
 
