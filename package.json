@@ -1,12 +1,12 @@
 {
   "name": "mvsqs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Moves messages between SQS queues",
   "main": "index.js",
   "scripts": {
     "test": "mocha --recursive test",
     "start": "node index.js",
-    "build": "npm run-script tsc",
+    "build": "tsc --outDir ./dist",
     "tsc": "tsc",
     "coverage": "nyc npm test",
     "lint": "tslint -p .",
@@ -32,8 +32,11 @@
     "typescript": "2.9.2"
   },
   "bin": {
-    "mvsqs": "./bin/global.js"
+    "mvsqs": "./dist/bin/global.js"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/joshfoeh/mvsqs.git"
