@@ -10,7 +10,13 @@ describe("Validate Arguments", () => {
     chai.use(sinonChai);
     chai.should();
 
-    sinon.spy(console, "log");
+    beforeEach(() => {
+        sinon.spy(console, "log");
+    });
+
+    afterEach(() => {
+        sinon.restore();
+    });
 
     it("Returns false if missing source", () => {
         // Setup

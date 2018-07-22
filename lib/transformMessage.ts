@@ -26,6 +26,14 @@ function transformAttributes(attributes: AWS.SQS.MessageBodyAttributeMap): AWS.S
             StringValue: value.StringValue,
             BinaryValue: value.BinaryValue
         } as AWS.SQS.MessageAttributeValue;
+
+        // Remove blank values
+        if (!transformed[key].StringValue) {
+            delete transformed[key].StringValue;
+        }
+        if (!transformed[key].BinaryValue) {
+            delete transformed[key].BinaryValue;
+        }
     }
     return transformed;
 }

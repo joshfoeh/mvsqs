@@ -38,7 +38,7 @@ describe("Transform Message", () => {
     it("Transforms message into correct value", () => {
         // Setup
         const expectedMessage = {
-            Body: body,
+            MessageBody: body,
             MessageAttributes: {
                 [key1]: {
                     DataType: dataType1,
@@ -60,7 +60,7 @@ describe("Transform Message", () => {
         const retMessage = transformMessage(received);
 
         // Validation
-        expect(retMessage).to.deep.equal(retMessage);
+        expect(retMessage).to.deep.equal(expected);
     });
 
 });

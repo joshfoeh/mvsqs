@@ -23,11 +23,11 @@ export function moveMessages(args: AWSArgs, {getSqs = getSQS, receive = receiveM
                 // No message was received, we have emptied the queue
                 return resolve(numMessages);
             }
-            numMessages += 1;
 
             const transformObject: TransformObject = transform(receivedMessage);
             sendRun(transformObject.sendingMessage).then(() => {
                 deleteRun(transformObject.deleteHandle).then(() => {
+                    numMessages += 1;
                     return receiveRun();
                 }).catch(() => {
                     console.log("Failed to delete message");
